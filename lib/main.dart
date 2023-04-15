@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_unavidabrillante/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_application_unavidabrillante/src/providers/wellbeing_provider.dart';
+
 import 'package:flutter_application_unavidabrillante/src/screens/home_screen.dart';
-
-
+import 'package:flutter_application_unavidabrillante/src/screens/register_screen.dart';
 
 void main() async {
+  // Inicializar Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WellbeingProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Self-Esteem App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomeScreen(),
-      ),
+    return MaterialApp(
+      title: 'Mi App',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/register': (context) => RegisterPage(),
+      },
     );
   }
 }

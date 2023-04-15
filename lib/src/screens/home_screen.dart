@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_unavidabrillante/auth.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+class HomePage extends StatelessWidget {
+  final AuthService _auth = AuthService();
 
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Self-Esteem App'),
+        title: Text('Inicio de sesión'),
       ),
       body: Center(
-        child: Text('Bienvenida a la aplicación de autoestima para mujeres'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              child: Text('Inicia sesión con Google'),
+              onPressed: () async {
+                await _auth.signInWithGoogle();
+              },
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              child: Text('¿No tienes una cuenta? Regístrate aquí.'),
+              onPressed: () {
+                Navigator.pushNamed(context, '/register');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
